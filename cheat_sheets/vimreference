@@ -1,0 +1,155 @@
+Accessing Help System
+---------------------
+
+C-]: 	Follow Tag
+C-O: 	Go back
+C-t: 	have to figure it out
+:help c:Displays help for c(ommand)
+:help v_c: Displays help for c(ommand) in visual mode.
+		Similar for i_ (insert) c_ (command), ...
+:helpgrep Regexp query
+
+
+Operators
+---------
+
+d: 	delete
+c: 	change
+r: 	replace
+R: 	replaces characters successively
+e: 	edit
+
+Move around
+-----------
+
+w: 	word
+b: 	beginning (goes backward)
+e: 	end (of word) 
+$: 	end of line 
+0: 	beginning of line
+C-O: 	Go back
+G: 	go to end of file
+gg: 	go to beginning of file
+C-]: 	follow link/search help
+
+prepend numbers to multiply effect
+prepend operator to manipulate
+
+Text manipulation
+-----------------
+
+>>: 	indent
+<<:  	unindent 
+. : 	continue (un) indenting
+dnd: 	delete n lines
+u:   	undo
+U:   	undo complete line
+C-r: 	redo
+p:  	paste
+y: 	yank (Ctrl-c)
+	yw: yanks word etc. 
+C-A: 	Append
+o/O: 	opens line below/above cursor position.
+
+C-n: 	Autocomplete
+C-xC-f: Lets you insert filename/path
+
+Search and Find
+---------------
+
+%: 	Search other paranthesis
+/str: 	Searches for string
+	n: searches next str
+	N: searches previous str
+:s/o/n: substitute o(ld) through n(ew). 
+	append /g to substitute all occurences in line 
+	append /gc to substitute all occurences in line and prompting everyone
+	prepend % (:%s/..) to perform in whole file
+
+
+	Ignore case option by entering:   :set ic
+	Set the 'hlsearch' and 'incsearch' options:  :set hls is
+	Now type the search command again and see what happens:  /ignore <ENTER>
+	To disable ignoring case enter:  :set noic
+
+	NOTE:  To remove the highlighting of matches enter:   :nohlsearch 
+	NOTE:  If you want to ignore case for just one search command, use  \c
+	       in the phrase:  /ignore\c  <ENTER>
+
+
+Interaction between files
+-------------------------
+
+:!bash:	Bash command
+:shell:	starts shell, exit with exit
+v: 	visual mode, select selection
+C-v: 	visual block: doesn't select lines but rectangular blocks.
+	(e.g. C-v G selects all lines in the current column to the floor)
+:w fn: 	writes selection to f(ile) n(ame)
+:r fn: 	inserts text from f(ile) n(ame)
+:put=readfile('path/to/file')[s:n]:     inserts lines s->n from file
+:r !b: 	inserts output from b(ash command)
+
+:set autowrite: Automatically writes changes to disk, everytime I change a file
+
+
+Window splitting and interaction
+--------------------------------
+
+C-w C-w: 	Change between windows
+:vsplit:     	New window
+C-w n <: 	Moves centerline n columns to the left
+C-w n >: 	Moves centerline n columns to the right
+C-w =  : 	Moves centerline to center
+
+File Explorer netrw
+-------------------
+
+:vs. 	: 	Open Explorer vertically in pwd
+:E 	: 	Open Explorer
+% 	: 	Create New File
+d 	: 	mkdir
+D 	: 	delete
+mf 	: 	mark file(s)
+i 	: 	toggle views 
+I 	: 	hide/show header
+
+Registers
+---------
+
+"ads: 	Cuts s(tructure), like d (line), w(ord), stores it in register a
+"Ads: 	appends structure to what's in register a
+"ay: 	yanks to register a
+"ap: 	Pastes register a
+:reg: 	Shows all registers and their content
+
+
+Program Editing
+---------------
+
+C-v <select> Shift I # Esc: Comment 
+C-v <select> x 		  : Uncomment
+
+
+Snippets (Have to dig into it at some point)
+--------------------------------------------
+
+Put command in .vimrc such that when executing it, a whole lotta stuff happens, e.g. setting upt the skeleton of a function
+(Remember Antoine's exe -> executable skeleton) 
+
+nnoremap: Paranoia command to avoid character typing recursions
+Structure: 
+<cmd_tag> :<do_stuff>
+<CR>: command for hitting enter
+Formatting error outputs: Philipp Bradley's Quickfix
+
+Makros
+------
+
+q: 	Starts recording makro
+n: 	give it arbitrary n(ame) character
+
+enter string of operations, e.g. 0rMj replaces the first character by M
+q: 	Stop recording
+@n: 	execute makro n
+

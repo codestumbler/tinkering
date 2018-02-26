@@ -1,0 +1,34 @@
+Minimal CMakeLists.txt file with gdb support
+============================================
+
+//which cmake is required? 
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+
+//Project name
+project(fct_ptr)
+
+//Which files need to be built? add one line per executable
+add_executable(fct_ptr fct_ptr.cpp)
+
+//add gdb support
+set(CMAKE_BUILD_TYPE Debug)
+
+-------------------------------------------------------------
+Create Makefile: 
+cmake -G Unix\ Makefiles ../src/CMakeLists.txt
+
+//-G: Flag, what compiler
+// path/to/buildprotocoll
+
+run cmake with 
+make 
+============================================================
+
+> Pointer to a function: 
+type (*fct_ptr)(args);
+
+    Apparently it doesn't matter, if I store output as 
+        out = (*fct_ptr)(args) 
+    or
+        out = fct_ptr(args)
+    Seems to be casted automatically :-S 

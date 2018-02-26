@@ -1,0 +1,26 @@
+roslaunch/launchfiles
+---------------------
+
+> output = screen : redirects msgs from ~/.ros/log to screen for that node
+> roslaunch --screen pkg launchfile: as above but for all nodes
+> required = "true" : if this node gets cancelled, all others will too
+> respawn  = "true" : if this node gets cancelled, it is respawned
+
+
+> ros::init_options::Anonymousname: allows running multiple instances
+guaranteeing unique names. 
+    > overwritten by the name tag in a roslaunch file
+> launch-prefix= "cmd prefix": a command that is written into bash before
+launching. if launch-prefix = "xterm -e", a separate terminal is launched,
+enabling separate in/output console for that node
+    > Other inputs are "gdb" for debugging or "nice" to set runtime priority
+> ns = "namespace name": pushes node into "namespace name"
+
+> Remapping of topic names
+<node>
+ <remap from="old name" to= "new name">
+</node>
+
+Note: Relative names, not global! I.e. do not prepend /
+(alternatively on command line: rosrun <pkg> <node> <old_topic_name>:=<new>
+ 
