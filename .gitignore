@@ -1,0 +1,3 @@
+# ignore swap and other temporary files
+cheat_sheets/*swp*
+*~

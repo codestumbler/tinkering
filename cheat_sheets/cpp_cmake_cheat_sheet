@@ -32,3 +32,10 @@ type (*fct_ptr)(args);
     or
         out = fct_ptr(args)
     Seems to be casted automatically :-S 
+
+-----------------------------------------------------------
+
+> Templates (still don't get it) 
+
+template <class T> 
+...

@@ -1,16 +1,43 @@
+Create ws/pkg
+=============
+
+$mkdir -p <ws_name>/src
+$catkin_create_pkg <pkg_name>
+    write .cpp code
+    adapt CMakeLists.txt
+    adapt package.xml
+
+$ cd .. //to pkg level
+$ set( CMAKE_EXPORT_COMPILE_COMMANDS ON ) //in top level CMakeLists.txt
+$ catkin_make
+$ cp build/compile_commands.json ../ //next to workspace dir
+
+
+relevant Structure
+==================
+
+compile_commands.json
+
+workspace/              build/          compile_commands.json
+                        devel/          source.bash
+                        src/            CMakeLists.txt  pkgs/  .cpp
+                                                               package.xml 
+                                                               CMakeLists  
+                                                                
 roslaunch/launchfiles
 ---------------------
 
-> output = screen : redirects msgs from ~/.ros/log to screen for that node
-> roslaunch --screen pkg launchfile: as above but for all nodes
-> required = "true" : if this node gets cancelled, all others will too
-> respawn  = "true" : if this node gets cancelled, it is respawned
+Generally:
+$ roslaunch package-name launch-file-name arg-name:=arg-value
+
+Tags: 
+$ output = screen : redirects msgs from ~/.ros/log to screen for that node
+$ roslaunch --screen pkg launchfile: as above but for all nodes
+$ required = "true" : if this node gets cancelled, all others will too
+$ respawn  = "true" : if this node gets cancelled, it is respawned
 
 
-> ros::init_options::Anonymousname: allows running multiple instances
-guaranteeing unique names. 
-    > overwritten by the name tag in a roslaunch file
-> launch-prefix= "cmd prefix": a command that is written into bash before
+$ launch-prefix= "cmd prefix": a command that is written into bash before
 launching. if launch-prefix = "xterm -e", a separate terminal is launched,
 enabling separate in/output console for that node
     > Other inputs are "gdb" for debugging or "nice" to set runtime priority
@@ -21,6 +48,55 @@ enabling separate in/output console for that node
  <remap from="old name" to= "new name">
 </node>
 
-Note: Relative names, not global! I.e. do not prepend /
-(alternatively on command line: rosrun <pkg> <node> <old_topic_name>:=<new>
+    Note: Relative names, not global! I.e. do not prepend /
+    (alternatively on command line: rosrun <pkg> <node> <old_topic_name>:=<new>
  
+include files to .launch file
+-----------------------------
+
+<include file="$(find package-name)/launch-file-name" />
+<include file="..." ns = "namespace"/> pusehs content of file to namespace
+
+Arguments vs Parameters
+-----------------------
+
+Arguments: given to a .launch file. not accessible by nodes
+        <arg name="arg-name" {default,value}= "arg-value"/>
+
+Arguments for an included file: 
+        <include file="path-to-launch-file">
+            <arg name="arg-name" value="arg-value"/>
+            ...
+        </include>
+
+Parameters: stored by active ros system. accessible to nodes via ros::param::get, to users via rosparam
+
+Groups 
+------
+
+<group ns="namespace" />
+    ...
+</group>
+
+Groups can conditionally be turned on and off: <group {if/unless}...>, condition is required to be 1 or 0. 
+
+Parameters
+----------
+
+The <rosparam> tag can be put inside of a <node> tag, in which case the parameter is treated like a private name. 
+$ rosparam get <namespace> : shows values of params in <namespace>
+$ rosparam set <namespace> <values>, e.g. (using YAML)
+$ rosparam set /duck_colors "huey: red
+$ dewey: blue
+$ louie: green
+$ webby: pink"
+
+$ rosparam {dump,load} <filename> <namespace> : writes to/reades from: params of <ns> to <fn> 
+
+Code
+====
+
+$ ros::init_options::Anonymousname: allows running multiple instances
+guaranteeing unique names. 
+    > overwritten by the name tag in a roslaunch file
+

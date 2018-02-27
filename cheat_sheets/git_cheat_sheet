@@ -1,0 +1,80 @@
+Workflow:
+---------
+        local copy --> stageing area --> local repo --> global repo
+        git <...>            add              commit         push 
+
+setup: 
+------
+$ git init //makes standard folder a git repo
+$git config user.<name,email,...>
+$ git remote add <nickname> <url> // mapping github url to nickname
+
+History: 
+--------
+$git log (--author <name>) 
+
+Comparing: 
+----------
+
+$git diff //local copy vs staged 
+$git diff --staged //staged vs repo
+
+Current situation
+-----------------
+
+$git status
+
+Deleting
+--------
+
+$git rm <filename> 
+        this also deletes file on harddrive!
+        ALSO HAVE TO COMMIT DELETION!
+
+Renaming
+--------
+
+$ mv <fn1> <fn2> 
+$ git add <fn2> 
+$ git rm <fn1>
+        Then, git will understand, that the file has been renamed.
+        Alternatively: 
+$ git mv <fn1> <fn2> 
+
+Adding and commiting
+--------------------
+
+        Separate: 
+$ git add <files>
+$ git commit -m "msg"
+
+        Combined: 
+
+$git commit -am "msg"   
+        (only use if all files in working copy are ready to be commited)
+        (also don't use for moving, renaming and deleting files)
+
+Undoing
+-------
+
+$ git checkout -- <filename> 
+        Basically the reverse of git commit -am: Takes the repo version 
+        and makes it the local copy
+
+$ git checkout <commit_id> -- <filename> 
+        "Go to commit <commit_id> and get a copy of <filename>" 
+        (Afterwards have to commit the undoing again.)
+
+$ git reset HEAD <filename> 
+        Brings file back from stageing area (git add) to local copy 
+
+Ignore Files
+------------
+
+$ touch .gitignore // List what kinda files should be ignored; one per line
+                   // comments start with #
+
+Branches
+--------
+
+pull request: request to have my changes made on branch <branch> be merged with the main master branch. (i think)
