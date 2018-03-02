@@ -25,7 +25,7 @@ workspace/              build/          compile_commands.json
                                                                CMakeLists  
                                                                 
 roslaunch/launchfiles
----------------------
+=====================
 
 Generally:
 $ roslaunch package-name launch-file-name arg-name:=arg-value
@@ -91,12 +91,48 @@ $ dewey: blue
 $ louie: green
 $ webby: pink"
 
-$ rosparam {dump,load} <filename> <namespace> : writes to/reades from: params of <ns> to <fn> 
+$ rosparam {dump,load} <filename>.yaml <namespace> : writes to/reades from: params of <ns> to <fn>.  
+
+Parameters set in Launchfiles, as children of the node have private names (afaik). In code, access with
+$ const std::string "~<param_name>"; 
+
+Commandline Tools
+=================
+
+$ rosrun
+$ roslaunch
+$ rosnode list
+$ rostopic list
+$ rosmsg list
+$ rosservice 
+$ rossrv
+
+rossrv vs rosservice ≃ rosmsg vs rostopic: Former shows all available, latter the currently active.
+
 
 Code
 ====
+
+Initialization
+--------------
 
 $ ros::init_options::Anonymousname: allows running multiple instances
 guaranteeing unique names. 
     > overwritten by the name tag in a roslaunch file
 
+Publisher
+---------
+
+$ ros::Publisher <obj> = nh.advertise<msgtype>(<topic name>, <queue size>)
+    
+    A Publisher object represents the advertising method of the node for a
+    specific message/topic.
+    The queue size defines the size of how long each advertising may be (afaik)
+
+ServiceCall
+-----------
+
+$ ros::ServiceClient <obj> = nh.serviceClient <node::service>("service")
+    The client object represents the desired service of a node. 
+    It needs no queue size, since a response is not returned until call 
+    succeeded.
