@@ -129,10 +129,23 @@ $ ros::Publisher <obj> = nh.advertise<msgtype>(<topic name>, <queue size>)
     specific message/topic.
     The queue size defines the size of how long each advertising may be (afaik)
 
+Subscriber
+----------
+
+    Callback function: we don't know, when exactly data will arrive => 
+    everytime it happens, this function is executed. 
+    This requires however to have 
+$ros::spin() -OR- ros::spinOnce() 
+    executed in the code. 
+
+
 ServiceCall
 -----------
 
-$ ros::ServiceClient <obj> = nh.serviceClient <node::service>("service")
+$ ros::ServiceClient <obj> = nh.serviceClient <service_name>("service")
     The client object represents the desired service of a node. 
     It needs no queue size, since a response is not returned until call 
     succeeded.
+    Cannot process private service names. With: 
+$ ros::NodeHandle nh("~")
+    can create a private namespace. 
