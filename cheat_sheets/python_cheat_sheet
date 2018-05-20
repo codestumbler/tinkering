@@ -1,0 +1,93 @@
+Function
+========
+
+def name(args):
+#
+# Block
+#
+    return res # OR return [a,b,...]
+
+Call: 
+f1, f2, ... = fct_name(args)
+
+> varargin: *params
+> Variables defined outside of the function scope are global
+> Variables defined inside  of the function scope are local
+> global variables are protected from local variables with the same name
+> As soon as an instruction for a variable arises in a function, it becomes local. Statements containing the variable in the 
+  function declaration prior to this instruction are automatically "alienated" from the "global" declaration. 
+> using keyword "global" in function enables manipulation of variable from outside function scope. (Discouraged approach)
+
+    Recursive Function/Recursion
+    ----------------------------
+
+    def fct(arg):
+        #
+        # Block
+        # Abort-criterion!!!
+        return function_of(fct(new_arg)
+    > Concept of the Stack: 
+      The deeper we go in the recursion, the more we add on the stack. When reading it: FILO (First in, last out)
+Print
+=====
+
+print(output)
+
+Types and Conversions
+=====================
+
+    list     
+    ----
+
+        array. Access: my_list[i][j]...
+        Read mxn Matrix: A = [[int(j) for j in input().split()] for i in range(m)]
+
+    Set
+    ---
+
+        Equivalent to mathematics: (unordered) assembly of unique elements or unmutable types.
+        Can perform standard operations (union, intersection, difference)
+        Definition: S = {...} or S = set(...)
+        E.g. S = set('hello') = {'h','e','l','o'}
+
+        A | B:  A.union(B), Returns a set which is the union of sets A and B.
+        A |= B: A.update(B), Adds all elements of array B to the set A.
+        A & B:  A.intersection(B), Returns a set which is the intersection of sets A and B.
+        A &= B: A.intersection_update(B), Leaves in the set A only items that belong to the set B.
+        A - B:  A.difference(B), Returns the set difference of A and B (the elements included in A, but not included in B).
+        A -= B: A.difference_update(B), Removes all elements of B from the set A.
+        A ^ B:  A.symmetric_difference(B), Returns the symmetric difference of sets A and B (the elements belonging to either A or B, but not to both sets simultaneously).
+        A ^= B: A.symmetric_difference_update(B), Writes in A the symmetric difference of sets A and B.
+        A <= B: A.issubset(B), Returns true if A is a subset of B.
+        A >= B: A.issuperset(B), Returns true if B is a subset of A.
+        A < B:  Equivalent to A <= B and A != B
+        A > B:  Equivalent to A >= B and A != B 
+
+        Add elements: S.add(elements) or S.update(elements)
+tuple 
+dictionary
+int
+float
+string
+
+
+convert list of ints to string: print(' '.join(map(str, list_of_ints))) 
+
+Slices
+------
+a[start:end] # items start through end-1
+a[start:]    # items start through the rest of the array
+a[:end]      # items from the beginning through end-1
+a[:]         # a copy of the whole array
+a[start:end:step] # every step item from start to end
+
+a[-1]    # last item in the array
+a[-2:]   # last two items in the array
+a[:-2]   # everything except the last two items
+
+Similarly, step may be a negative number:
+
+a[::-1]    # all items in the array, reversed
+a[1::-1]   # the first two items, reversed
+a[:-3:-1]  # the last two items, reversed
+a[-3::-1]  # everything except the last two items, reversed
