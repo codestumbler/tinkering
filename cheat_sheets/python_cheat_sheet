@@ -49,6 +49,7 @@ Types and Conversions
         Can perform standard operations (union, intersection, difference)
         Definition: S = {...} or S = set(...)
         E.g. S = set('hello') = {'h','e','l','o'}
+        !!! S = {} creates a Dictionary, NOT a set!!!
 
         A | B:  A.union(B), Returns a set which is the union of sets A and B.
         A |= B: A.update(B), Adds all elements of array B to the set A.
@@ -64,13 +65,51 @@ Types and Conversions
         A > B:  Equivalent to A >= B and A != B 
 
         Add elements: S.add(elements) or S.update(elements)
-tuple 
-dictionary
+        
+        convert list of numbers to set: 
+        n = ['1','10']
+        n = [int(i) for i in n] # -> n = [1,10]
+        n = set(n)
+
+    Tuple 
+    -----
+        
+        my_tuple = (...,elements,...)/ singleton = (elemt,) 
+        Like a list but immutable (and thus faster). 
+
+
+    Dictionary/Assiociative Array
+    -----------------------------
+        
+        List/Array: Data indexed by integers. 
+        Dictionary: Data indexed by whatever I want it to be. 
+        Consists of Key (unique identifier, being any immutabledata type other than set) and value (non unique). The two form a Tuple. 
+        D = {key1: val1, key2: val2, ....}
+        D = dict(zip([...keys...],[...vals...]))
+        (If they are strings, put them in 'quotes'  )
+        
+        Access: D[key], D.keys(), D.values(), ...
+        Delete: del(D[key]), A.pop(key, None)
+
+        if key doesn't exist, an exception is thrown
+        
+        Iteration: 
+            for key in D:
+                # do stuff
+            for key, val in D.items(): 
+                # do stuff
+        Assignment: 
+            D[key] = value/function output
+        
+        Methods:
+            D.get(key,default):
+                If key and corresponding value exist, the latter is returned. Else, key is associated with default (but not added to D. For this: D[key] = D.get(key,default)) 
+
+
 int
 float
-string
-
-
+    string
+    ------
 convert list of ints to string: print(' '.join(map(str, list_of_ints))) 
 
 Slices
@@ -91,3 +130,12 @@ a[::-1]    # all items in the array, reversed
 a[1::-1]   # the first two items, reversed
 a[:-3:-1]  # the last two items, reversed
 a[-3::-1]  # everything except the last two items, reversed
+
+Flow control
+============
+
+    try:
+        <operation>
+    except <expected error>:  
+        <exception> 
+
